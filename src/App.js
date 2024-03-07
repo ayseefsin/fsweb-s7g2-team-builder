@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
+import { Form } from "./components/From";
 
 function App() {
   const initialMembers = [
@@ -19,6 +20,7 @@ function App() {
   const [members, setMembers] = useState(initialMembers);
   return (
     <div className="App">
+      <Form />
       <ul>
         {members.map((member) => (
           <li>
