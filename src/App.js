@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const initialMembers = [
+    {
+      name: "aysin",
+      email: "ae@ae.com",
+      rol: "backend",
+    },
+    {
+      name: "zeus",
+      email: "ae@ae.com",
+      rol: "frontend",
+    },
+    { name: "hades", email: "hd@ae.com", rol: "backend" },
+  ];
+  const [members, setMembers] = useState(initialMembers);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>
+        {members.map((member) => (
+          <li>
+            {member.name} - {member.email} - {member.rol}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
