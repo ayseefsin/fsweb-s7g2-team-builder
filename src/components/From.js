@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-export const Form = () => {
+export const Form = (props) => {
+  const { addMember } = props;
   const [form, setForm] = useState({
     name: "aysin",
     email: "ae@ae.com",
@@ -10,11 +11,16 @@ export const Form = () => {
     const newForm = { ...form, [e.target.name]: e.target.value };
     setForm(newForm);
   };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(form);
+    addMember(form);
+  };
 
   return (
     <div>
       <h3>Member Form</h3>
-      <form>
+      <form onSubmit={submitHandler}>
         <label id="name">
           name:{" "}
           <input

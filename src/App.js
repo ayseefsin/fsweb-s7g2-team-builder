@@ -18,9 +18,12 @@ function App() {
     { name: "hades", email: "hd@ae.com", rol: "backend" },
   ];
   const [members, setMembers] = useState(initialMembers);
+  const addMemberToTeam = (member) => {
+    setMembers([...members, member]);
+  };
   return (
     <div className="App">
-      <Form />
+      <Form addMember={addMemberToTeam} />
       <ul>
         {members.map((member) => (
           <li>
