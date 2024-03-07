@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form } from "./components/From";
 
 function App() {
@@ -12,25 +12,40 @@ function App() {
     },
     {
       name: "zeus",
-      email: "ae@ae.com",
+      email: "ze@ae.com",
       rol: "frontend",
     },
     { name: "hades", email: "hd@ae.com", rol: "backend" },
   ];
   const [members, setMembers] = useState(initialMembers);
-  const [willUpdateMember, setWillUpdateMember] = useState(null);
+  const [editingMember, setEditingMember] = useState(null);
   const addMemberToTeam = (member) => {
     setMembers([...members, member]);
+  };
+  const updateMember = (memberUpdateObj) => {
+    const updatedMembers = members.map((m) => {
+      if (m.email === editingMember.email) {
+        return memberUpdateObj;
+      } else {
+        return m;
+      }
+    });
+    setEditingMember(null);
+    setMembers(updatedMembers);
   };
 
   return (
     <div className="App">
-      <Form addMember={addMemberToTeam} willUpdateMember={willUpdateMember} />
+      <Form
+        addMember={addMemberToTeam}
+        editingMember={editingMember}
+        editMember={updateMember}
+      />
       <ul>
         {members.map((member, i) => (
           <li key={i}>
             {member.name} - {member.email} - {member.rol} -{" "}
-            <button onClick={() => setWillUpdateMember(member)}>Edit</button>
+            <button onClick={() => setEditingMember(member)}>Edit</button>
           </li>
         ))}
       </ul>

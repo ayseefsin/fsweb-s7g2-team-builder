@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 export const Form = (props) => {
-  const { addMember, willUpdateMember } = props;
+  const { addMember, editingMember, editMember } = props;
 
   const [form, setForm] = useState(
-    willUpdateMember || {
+    editingMember || {
       name: "aysin",
       email: "ae@ae.com",
       rol: "bakcend developer",
@@ -17,14 +17,18 @@ export const Form = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(form);
-    addMember(form);
+    if (editingMember) {
+      editMember(form);
+    } else {
+      addMember(form);
+    }
   };
   useEffect(() => {
     console.log("useeffect work");
-    if (willUpdateMember) {
-      setForm(willUpdateMember);
+    if (editingMember) {
+      setForm(editingMember);
     }
-  }, [willUpdateMember]);
+  }, [editingMember]);
   return (
     <div>
       <h3>Member Form</h3>
