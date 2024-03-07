@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "./components/From";
 
 function App() {
@@ -18,16 +18,19 @@ function App() {
     { name: "hades", email: "hd@ae.com", rol: "backend" },
   ];
   const [members, setMembers] = useState(initialMembers);
+  const [willUpdateMember, setWillUpdateMember] = useState(null);
   const addMemberToTeam = (member) => {
     setMembers([...members, member]);
   };
+
   return (
     <div className="App">
-      <Form addMember={addMemberToTeam} />
+      <Form addMember={addMemberToTeam} willUpdateMember={willUpdateMember} />
       <ul>
-        {members.map((member) => (
-          <li>
-            {member.name} - {member.email} - {member.rol}
+        {members.map((member, i) => (
+          <li key={i}>
+            {member.name} - {member.email} - {member.rol} -{" "}
+            <button onClick={() => setWillUpdateMember(member)}>Edit</button>
           </li>
         ))}
       </ul>

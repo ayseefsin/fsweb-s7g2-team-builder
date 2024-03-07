@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Form = (props) => {
-  const { addMember } = props;
-  const [form, setForm] = useState({
-    name: "aysin",
-    email: "ae@ae.com",
-    rol: "bakcend developer",
-  });
+  const { addMember, willUpdateMember } = props;
+
+  const [form, setForm] = useState(
+    willUpdateMember || {
+      name: "aysin",
+      email: "ae@ae.com",
+      rol: "bakcend developer",
+    }
+  );
   const changeHandler = (e) => {
     const newForm = { ...form, [e.target.name]: e.target.value };
     setForm(newForm);
@@ -16,7 +19,12 @@ export const Form = (props) => {
     console.log(form);
     addMember(form);
   };
-
+  useEffect(() => {
+    console.log("useeffect work");
+    if (willUpdateMember) {
+      setForm(willUpdateMember);
+    }
+  }, [willUpdateMember]);
   return (
     <div>
       <h3>Member Form</h3>
